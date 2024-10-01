@@ -21,5 +21,23 @@ app.get("/health-checkup", function(req, res){
     //
     res.send("Your kidney is fine")
 });
-app.listen(3000);
+
 //dumb way of doin auth checkups(upar ka code), repeat yourself for every new entry
+let numberOfRequests = 0;
+function calculateRequests(req, res, next){
+    numberOfRequests++;
+    console.log(numberOfRequests);
+    next();
+}
+console.log(express.json());
+//calculate requests - middlewares
+app.get("/health-checkup2", calculateRequests, function(req, res){
+res.send("counting no of reqs")
+}) 
+//when using express.json()
+//parses the body of incoming requests and populates req.body with the parsed data with JSON as an input.
+app.post("/health-checkup", function(req,res){
+    console.log(req.body)
+    res.json("Donee")
+})
+app.listen(3000);
