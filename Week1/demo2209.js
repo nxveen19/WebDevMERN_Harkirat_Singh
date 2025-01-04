@@ -51,7 +51,7 @@ console.log(reverseArray(myArray));
 
 const users = {
     'name' : "NAveen",
-    surname : "Pandey"
+    'surname' : "Pandey"
 } 
 
 users.name = "anas"
