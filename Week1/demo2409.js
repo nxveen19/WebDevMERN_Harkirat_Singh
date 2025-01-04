@@ -9,6 +9,13 @@ fs.readFile('a.txt', "utf-8", function(err, data){
 });
 }
 
+// Step 1: pandey() is called, which triggers the Promise.
+// Step 2: Inside the Promise, fs.readFile() starts reading the file 'a.txt' asynchronously.
+// Step 3: While fs.readFile() is working, the program continues executing other tasks (non-blocking behavior).
+// Step 4: Once the file is successfully read, the resolve(data) function is called with the file's content.
+// Step 5: The Promise is now fulfilled, and .then(onDone) runs. where value of resolve() is taken as an arguemnt in then() i.e. in Ondone here
+// Step 6: The onDone function logs the content of the file (data) to the console.
+
 function onDone(data){
     console.log(data)
 }
@@ -23,10 +30,11 @@ function pandey(){
 pandey().then(onDone) 
 
 var d = new Promise(function(resolve){
-    resolve("bas")
+    resolve("bas bhaii")
 });
-function callback(){
-    console.log(d)
+// resolved value i.e. bas bhaii is passed as an argument to callback(). while d is logged as a promise object Promise { 'bas' } its resolved value is logged as 'bas bhaii'
+function callback(value){
+    console.log(value)
 }
 d.then(callback)
 
@@ -43,6 +51,8 @@ console.log(p)
 //     });
 // }
 // naveenReadFile().then(resolve)
+
+// here function anasReadFile(uske andar new Promise fn(Promise function me executor fn which takes resolve, reject as arg(uske andar setTimeout fn(setTimeout fn me executor fn(uske andar resolve function which reolve 'hi there' and stores in p)))))
 function anasReadFile(){
     let p = new Promise(function(resolve){
         setTimeout(function(){
@@ -55,7 +65,8 @@ function anasReadFile(){
 anasReadFile().then(function(resolve){
     console.log(resolve)
 });
-//OOOOOOOOORRRRRRRRR insteas of this
+// it would be same as if i wrote function callback(value){ console.log(value) } and call callback inside .then()
+//OOOOOOOOORRRRRRRRR instead of this
 async function main() {
     //no callbacks, no .then syntax
     let value = await anasReadFile()
