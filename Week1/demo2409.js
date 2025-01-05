@@ -52,7 +52,7 @@ console.log(p)
 // }
 // naveenReadFile().then(resolve)
 
-// here function anasReadFile(uske andar new Promise fn(Promise function me executor fn which takes resolve, reject as arg(uske andar setTimeout fn(setTimeout fn me executor fn(uske andar resolve function which reolve 'hi there' and stores in p)))))
+// here function anasReadFile(uske andar new Promise class(Promise class me executor fn which takes resolve, reject as arg(uske andar setTimeout fn(setTimeout fn me executor fn(uske andar resolve function which reolve 'hi there' and stores in p)))))
 function anasReadFile(){
     let p = new Promise(function(resolve){
         setTimeout(function(){
@@ -69,7 +69,7 @@ anasReadFile().then(function(resolve){
 //OOOOOOOOORRRRRRRRR instead of this
 async function main() {
     //no callbacks, no .then syntax
-    let value = await anasReadFile()
+    let value = await anasReadFile() // resolved value stored in value
     console.log(value);
 }
 main();

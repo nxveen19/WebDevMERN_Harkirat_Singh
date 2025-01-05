@@ -49,6 +49,7 @@ app.post('/', function(req, res){
     users[0].kidneys.push({
         healthy: true
     })
+    // which makes it {healthy: false},{healthy : true}
     res.json({
         msg: "Done!!"
     })
@@ -79,7 +80,7 @@ app.delete("/", function(req,res){
     //only if there is atleast 1 unhealthy kidney
     let newKidneys = [];
     for (let i=0; i<users[0].kidneys.length; i++){
-        if (users[0].kidneys[i].healthy =true){
+        if (users[0].kidneys[i].healthy == true){
             newKidneys.push({
                 healthy: true
             })
@@ -89,7 +90,7 @@ app.delete("/", function(req,res){
         users[0].kidneys =newKidneys;
         res.json("Done!!");
     }else{
-        res.sendStatus(411).json({
+        res.status(411).json({ // or sendStatus() w/o json()
             msg: "You have no bad kidneys"
         })
     }

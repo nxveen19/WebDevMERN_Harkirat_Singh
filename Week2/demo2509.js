@@ -5,7 +5,7 @@ const port = 3000;
 const bodyParser = require("body-parser")
 app.use(express.text ());
 console.log(app.listen())
- 
+
 // app.use(bodyParser.text())
 app.get('/', (req, res) => {
     res.send('<b>Hiii there!!</b>')
