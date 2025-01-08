@@ -8,16 +8,16 @@ app.post("/kidney-checkup", function(req, res){
     const kidneyLength = kidneys.length;
     res.send("you have" + kidneyLength + "kidneys");
 })
-app.listen(3005);
+app.listen(3000);
 //global catches(middleware)
-// app.use(function(srr, req, res, next){
+// app.use(function(err, req, res, next){
 //     res.json
 //     ({msg: "Sorry server is down"})
 // })
 
 //ZOD
 const zod = require("zod")
-const schema = zod.array(zod.number())
+const schema = zod.array(zod.number()) // schema is array of numbers
 // {
 //     email: string@email.com
 //     password: atleast 8 Characters
@@ -30,10 +30,11 @@ const schema1 = zod.object({
     kidneys: zod.array(zod.number())
 })
 app.post("/health-checkup", function(req, res){
+    //expected input
     //kidneys[1,2]
     // const kidneys = req.body.kidneys;
     //validation
-    const response =  schema1.safeParse(req.body);
+    const response =  schema1.safeParse(req.body); // to validate zod
     if(!response.success){
         res.status(411).json({
             msg : "input is invalid"

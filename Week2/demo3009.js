@@ -18,6 +18,7 @@ function mul(i) {
 let myArray = [1,2,3,4,5]
 const ans = myArray.map(mul);
 console.log(ans)
+
 //filtering
 //given an array, give me back all even values form i
 filterLogic = (n) => {
