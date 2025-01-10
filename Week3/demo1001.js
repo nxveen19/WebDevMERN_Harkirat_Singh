@@ -1,3 +1,5 @@
+//The given code is authenticated for a username and password
+
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const jwtPassword = "naveenpandey"; // secret key used to verify tokens sign
@@ -25,7 +27,7 @@ const ALL_USERS = [
 
 function userExists(username, password) {
   for (let i = 0; i < ALL_USERS.length; i++) {
-    if (ALL_USERS[i].username === username && ALL_USERS[i].password === password) {
+    if (ALL_USERS[i].username == username && ALL_USERS[i].password == password) {
       return true; 
     }
   }
@@ -58,7 +60,13 @@ app.get("/users", function (req, res) {
     console.log(decoded)
     const username = decoded.username;
     res.json({
-      username
+      users: ALL_USERS.filter(function(value){ // to filter out your own username
+        if (value.username == username) {
+          return false;
+        } else {
+          return true;
+        }
+      })
     })
     // return a list of users other than this username
   } catch (err) {
