@@ -1,8 +1,9 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const jwtPassword = "123456";
+const jwtPassword = "naveenpandey"; // secret key used to verify tokens sign
 
 const app = express();
+app.use(express.json())
 
 const ALL_USERS = [
   {
@@ -18,14 +19,20 @@ const ALL_USERS = [
   {
     username: "priya@gmail.com",
     password: "123321",
-    name: "Priya kumari",
+    name: "Priya kumari"
   },
 ];
 
 function userExists(username, password) {
-  // write logic to return true or false if this user exists
-  // in ALL_USERS array
+  for (let i = 0; i < ALL_USERS.length; i++) {
+    if (ALL_USERS[i].username === username && ALL_USERS[i].password === password) {
+      return true; 
+    }
+  }
+  return false;
 }
+
+
 
 app.post("/signin", function (req, res) {
   const username = req.body.username;
@@ -37,7 +44,7 @@ app.post("/signin", function (req, res) {
     });
   }
 
-  var token = jwt.sign({ username: username }, "shhhhh");
+  var token = jwt.sign({ username: username }, jwtPassword);
   return res.json({
     token,
   });
@@ -45,9 +52,14 @@ app.post("/signin", function (req, res) {
 
 app.get("/users", function (req, res) {
   const token = req.headers.authorization;
+  // const password = req.body.password
   try {
     const decoded = jwt.verify(token, jwtPassword);
+    console.log(decoded)
     const username = decoded.username;
+    res.json({
+      username
+    })
     // return a list of users other than this username
   } catch (err) {
     return res.status(403).json({
