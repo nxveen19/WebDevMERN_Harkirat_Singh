@@ -1,52 +1,13 @@
-const express = require("express");
-const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const jwtPassword = "123456";
-
-mongoose.connect(
-  "your_mongo_url",
-);
-
-const User = mongoose.model("User", {
-  name: String,
-  username: String,
-  pasword: String,
+//connected with db user_app *NOT* with collection 
+mongoose.connect("mongodb+srv://naveen123:72769602@cluster0.ykxfp.mongodb.net/user_app") 
+const User = mongoose.model('users', {
+    name : String,   // this is the schema
+    password: String
 });
+const user = new User({ name: 'Naveen pandey', 
+    email: 'naveen@gmail.com', password: '112233'}); // created new user
+user.save() //put data into database
+// kitty.save().then( () => console.log('meow'));
 
-const app = express();
-app.use(express.json());
-
-function userExists(username, password) {
-  // should check in the database
-}
-
-app.post("/signin", async function (req, res) {
-  const username = req.body.username;
-  const password = req.body.password;
-
-  if (!userExists(username, password)) {
-    return res.status(403).json({
-      msg: "User doesnt exist in our in memory db",
-    });
-  }
-
-  var token = jwt.sign({ username: username }, "shhhhh");
-  return res.json({
-    token,
-  });
-});
-
-app.get("/users", function (req, res) {
-  const token = req.headers.authorization;
-  try {
-    const decoded = jwt.verify(token, jwtPassword);
-    const username = decoded.username;
-    // return a list of users other than this username from the database
-  } catch (err) {
-    return res.status(403).json({
-      msg: "Invalid token",
-    });
-  }
-});
-
-app.listen(3000);
+// Step 2: Running this via http methods
