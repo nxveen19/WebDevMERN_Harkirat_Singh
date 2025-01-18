@@ -14,8 +14,8 @@ function objectMethods(obj) {
   let hasProp = obj.hasOwnProperty("property");
   console.log("After hasOwnProperty():", hasProp);
 
-  let newObj = Object.assign({}, obj, { newProperty: "newValue" });
-  console.log("After Object.assign():", newObj);
+  let newObj = Object.assign({}, obj, { key3: "newValue" }); // {} in obj.assign() creates a new obj in {}
+  console.log("After Object.assign():", newObj , obj); // you get you dict obj, newobj where obj is not modified
 
 
 }
