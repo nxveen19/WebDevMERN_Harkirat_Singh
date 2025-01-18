@@ -102,4 +102,4 @@ function sortExample(arr) {
   });
   console.log("After sort:", arr);
 }
-sortExample([5, 2, 3, 4, 1]);
+sortExample([5, 2, 3, 4, 1, 5, 6, 8]);

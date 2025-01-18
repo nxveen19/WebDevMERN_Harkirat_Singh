@@ -1,20 +1,20 @@
 //creating class
 class  Animal {
-  constructor(name, legCount, speaks){
+  constructor(name, legCount, speaks){  
     this.name = name;
     this.legCount = legCount;
     this.speaks = speaks;
   }
   //function
   speak(){
-    console.log("hi there" + this.speaks);
+    console.log("hi there " + this.speaks);
   }
   static fn() {
     console.log("Who let the dogs Out")
   }
 }
 
-//creating Object
+//creating Object 
 let dog = new Animal("dog", 2, "bhow bhow")
 console.log(dog.name)
 //no need to create object for static, call using class
@@ -44,3 +44,5 @@ function sumOfSquares(a,b){
   return square(a) + square(b)
 }
 console.log(sumOfSquares(4,5));
+let cat = new Animal("billa", 4, "meow");
+cat.speak()
