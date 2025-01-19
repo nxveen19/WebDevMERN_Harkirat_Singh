@@ -23,3 +23,18 @@ fs.writeFile("example.txt", new_data1, 'utf-8', (err) => {
 //  - HH:MM::SS (Eg. 13:45:23)
 
 //  - HH:MM::SS AM/PM (Eg 01:45:23 PM)
+function getCurrentTime(){ 
+const date =  new Date
+hour = date.getHours();
+minute = date.getMinutes();
+second  = String(date.getSeconds()).padStart(2,'0');
+if (hour >= 12){
+return `${hour}:${minute}:${second} PM`;
+} else {
+    return `${hour}:${minute}:${second} AM`;
+}
+}
+
+setInterval(() => {
+    console.log(getCurrentTime())
+}, 1000)
