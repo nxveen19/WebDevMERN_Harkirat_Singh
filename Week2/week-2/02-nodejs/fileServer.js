@@ -16,17 +16,34 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const app = express();
+app.use(express.json());
+
+app.get('/files', (req, res) => {
+  fs.readdir(path.join(__dirname, './files/'), 'utf-8', (err, data) => {
+    if (err){
+      return res.sendStatus(500).json({error: "Failed to retrieve data"});
+    }
+    res.json(data)
+  })
+})
 
 app.get("/files/:fileName", function (req, res){
-  const name = req.params.fileName;
+  const name = req.params.fileName; // url should be req from params
   console.log(name);
   //This constructs the absolute path to the file by joining the directory name of the current module (__dirname) with the file name (name).
-  const filePath = path.join(__dirname, name); // Construct the file path
+  const filePath = path.join(__dirname, './files' ,name); // Construct the file path by joining 'dirname' /week2/02-nodejs with ./files/ with name of file
+  // it does not check whether file exist or not. if i put example.txt it will create a path with /files/example.txt
+  console.log(filePath)
+  console.log(__dirname)
   fs.readFile(filePath, "utf-8", function(err, data){
     res.json({
-      data
-    });
+      data});
   })
 });
+
+app.all('*', (req,res) => {
+  res.status(404).send('Route not found');
+});
+
 app.listen(3005);
 module.exports = app;
