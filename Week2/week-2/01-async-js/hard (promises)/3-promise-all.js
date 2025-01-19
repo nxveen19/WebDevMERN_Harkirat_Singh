@@ -37,5 +37,5 @@ function calculateTime(t1, t2, t3) {
         console.log(`Time Taken is : ${timeTaken}`)
     })
 }
-calculateTime(1000,2000, 3000)
+calculateTime(3000,2000, 1000)
 module.exports = calculateTime;
