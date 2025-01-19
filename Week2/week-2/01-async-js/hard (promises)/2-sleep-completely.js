@@ -21,7 +21,7 @@ function add(a, b){
     console.log(a+b);
 }
 
-add(5, 3) // this fn is sync and it si outside sleep() so it gets executed immediately
+add(5, 3) // this fn is sync and it is outside sleep() so it gets executed immediately
 
 // The while loop in your busyWait function blocks the JavaScript thread, 
 // so it doesn’t allow the event loop to process other tasks.

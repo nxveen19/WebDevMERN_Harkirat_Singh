@@ -44,11 +44,12 @@ function expensiveOperation() {
     }
     console.log(`Expensive operation completed. Counter: ${counter}`);
 }
-// The readFile callback still runs after the expensive operation because oprtn is asynchronous, 
+// The readFile callback still runs after the expensive operation because it is asynchronous, 
 // but since the operation is synchronous, it still blocks the event loop until it's done.
 function navReadFile(){
     let p = new Promise((resolve) => {
-        fs.appendFile("example.txt", "shuru krte hai bina kisi bkchodi ke", 'utf-8', (err) => { // append adds the new data while writeFile replaces with the existing data
+        fs.appendFile("example.txt", "shuru krte hai bina kisi bkchodi ke", 'utf-8', (err) => { 
+            // append adds the new data while writeFile replaces with the existing data
             console.log("data written successfully")
         });
         fs.readFile("example.txt", "utf-8", (err, data) => { // fs itself is async
