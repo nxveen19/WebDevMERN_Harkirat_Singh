@@ -4,10 +4,12 @@
 
 function demo_wait(n) {
     setTimeout(() => {
-        p = new Promise((resolve) => {
+        p =  new Promise((resolve) => {
             resolve("promise resolved");
         })
-        p.then(console.log("promise resolved"))
+        p.then((message) => {
+            console.log(message)
+        })
     }, n)
 }
 demo_wait(2000)
