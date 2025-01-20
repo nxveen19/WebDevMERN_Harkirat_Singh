@@ -141,7 +141,7 @@ app.put('/todos/:id', (req, res) => {
 app.delete('/todos/:id', (req,res)=> {
   let id = parseInt(req.params.id);
   fs.readFile(todos, 'utf-8', (err, data)=> {
-    let todo_data = JSON.parse(data);
+    let todo_data = JSON.parse(data); //converted to json obj
     let todoIndex = findIndex(todo_data, id);
     // splice specify from this index REMOVE  these number of items and keep on adding these items
     todo_data.splice(todoIndex, 1); //splice(from_this_index, no_of_items, item1, item2, ....)   
