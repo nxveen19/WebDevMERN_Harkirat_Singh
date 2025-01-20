@@ -95,7 +95,6 @@ app.post('/todos/', (req,res)=> {
     }
     const todo_data = JSON.parse(data);
     todo_data.push(newTodo);
-    let todoIndex = findIndex(todo_data, newTodo.id);
   fs.writeFile(todos, JSON.stringify(todo_data), 'utf-8', (err)=> {
     if (err) throw (error)
       res.status(200).json(todo_data)
