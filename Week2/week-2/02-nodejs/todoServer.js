@@ -43,10 +43,21 @@ const fs = require('fs');
 const path = require('path')
 const express = require('express');
 const bodyParser = require('body-parser');
+const { error } = require('console');
+const { date } = require('zod');
 const app = express();
   
 app.use(bodyParser.json());
 //app.use(express.json());
+function findIndex(arr, id){
+  for (i=0; i < arr.length; i++){
+    if (arr[i].id === id){
+      console.log(i)
+      return i;
+    }
+  }
+  return -1;
+}
 
 const todos = path.join(__dirname, './todos.json')
 console.log(todos)
@@ -59,16 +70,86 @@ app.get('/todos', (req,res) => {
 })
 
 app.get('/todos/:id', (req, res) => {
-  let {id} = req.params;
-  fs.readFile(todos, 'utf-8', (err,data) =>{
-    let todo_data = JSON.parse(data);
-    for(let arr=0; arr<todo_data.length; arr++){
-      if (id == todo_data[arr].id){
-        res.json(todo_data[arr]);
-      };
-    };
-  })
-})
+  let todo_id = parseInt(req.params.id);
 
+  fs.readFile(todos, 'utf-8', (err,data) =>{
+    //console.log(data);
+    const todo_data = JSON.parse(data);
+    //console.log(todo_data);
+    const todoIndex = findIndex(todo_data, todo_id)
+    if (todoIndex === -1) {
+      return res.status(404).json({ error: 'Todo not found' });
+    } else {
+    res.json(todo_data[todoIndex]);
+    }
+  })
+});
+
+app.post('/todos/', (req,res)=> {
+
+  fs.readFile(todos, 'utf-8', (err, data)=> {
+    const newTodo = {
+      id: req.body.id,
+      title: req.body.title,
+      description: req.body.description
+    }
+    const todo_data = JSON.parse(data);
+    todo_data.push(newTodo);
+    let todoIndex = findIndex(todo_data, newTodo.id);
+  fs.writeFile(todos, JSON.stringify(todo_data), 'utf-8', (err)=> {
+    if (err) throw (error)
+      res.status(200).json(todo_data)
+  });
+});
+});
+
+// In this put I update this inside app.put() code i have written which is not totally correct
+// these edits should be made in body , POSTMAN for sending requests and called as req.body.id 
+// this makes it problematic as I need to make changes in app.post
+
+app.put('/todos/:id', (req, res) => {
+  let id = parseInt(req.params.id);
+
+  fs.readFile(todos, 'utf-8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      return res.status(500).json({ message: 'Server error' });
+    }
+
+    let todo_data = JSON.parse(data);
+    let todoItem = todo_data.find((t) => t.id == id); // OOR (t) => {return t.id == id}
+
+    if (todoItem) {
+      // Update the specific field(s)
+      todoItem.Description = "Updated todo successfully";
+
+      // Write the updated data back to the file
+      fs.writeFile(todos, JSON.stringify(todo_data, null, 2), 'utf-8', (err) => {
+        if (err) {
+          console.error('Error writing file:', err);
+          return res.status(500).json({ message: 'Server error' });
+        }
+        res.status(200).json(todo_data);
+      });
+    } else {
+      // Return 404 if the item is not found
+      res.status(404).json({ message: `Todo with id ${id} not found` });
+    }
+  });
+});
+
+app.delete('/todos/:id', (req,res)=> {
+  let id = parseInt(req.params.id);
+  fs.readFile(todos, 'utf-8', (err, data)=> {
+    let todo_data = JSON.parse(data);
+    let todoIndex = findIndex(todo_data, id);
+    // splice specify from this index REMOVE  these number of items and keep on adding these items
+    todo_data.splice(todoIndex, 1); //splice(from_this_index, no_of_items, item1, item2, ....)   
+    fs.writeFile(todos, JSON.stringify(todo_data), (err)=> {
+      if (err) throw err;
+      res.status(200).json(todo_data)
+    });
+  });
+});
 app.listen(3000)
 module.exports = app;

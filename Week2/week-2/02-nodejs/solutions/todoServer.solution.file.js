@@ -13,7 +13,7 @@ function findIndex(arr, id) {
   return -1;
 }
 
-function removeAtIndex(arr, index) {
+function removeAtIndex(arr, index) { // naak ko seedha nahi idr ulta pkda hai
   let newArray = [];
   for (let i = 0; i < arr.length; i++) {
     if (i !== index) newArray.push(arr[i]);
