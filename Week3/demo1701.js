@@ -3,7 +3,7 @@ const app = express();
 app.use(express.json())
 const mongoose = require("mongoose");
 //connected with db user_app *NOT* with collection 
-mongoose.connect("mongodb+srv://naveen123:72769602@cluster0.ykxfp.mongodb.net/user_app") 
+mongoose.connect("") 
 const User = mongoose.model('users', {
     name : String,   // this is the schema
     password: String
