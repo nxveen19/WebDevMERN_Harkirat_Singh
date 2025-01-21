@@ -14,9 +14,11 @@ const jwtPassword = 'secret';
  *                        the password does not meet the length requirement.
  */
 function signJwt(username, password) {
-    // Your code here
+    let token = jwt.sign({username, password}, jwtPassword)
+    console.log(`Signed Jwt is : ${token}`);
+    return token
 }
-
+// signJwt()
 /**
  * Verifies a JWT using a secret key.
  *
@@ -26,9 +28,11 @@ function signJwt(username, password) {
  *                    using the secret key.
  */
 function verifyJwt(token) {
-    // Your code here
+    let decoded = jwt.verify(token, jwtPassword);
+    console.log(`Verified Jwt is : `, decoded);
+    return decoded
 }
-
+//verifyJwt()
 /**
  * Decodes a JWT to reveal its payload without verifying its authenticity.
  *
@@ -37,10 +41,13 @@ function verifyJwt(token) {
  *                         Returns false if the token is not a valid JWT format.
  */
 function decodeJwt(token) {
-    // Your code here
+    let a = jwt.decode(token)
+    console.log(`Decoded token is : `, a)
+
 }
-
-
+const token = signJwt("naveenpandey@gmail.com", "123132321")
+verifyJwt(token)
+decodeJwt(token)
 module.exports = {
   signJwt,
   verifyJwt,
