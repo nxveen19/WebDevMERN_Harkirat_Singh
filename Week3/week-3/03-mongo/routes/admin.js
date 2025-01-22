@@ -44,7 +44,10 @@ router.post('/courses', adminMiddleware, async (req, res) => {
     })
 });
 
-router.get('/courses', adminMiddleware, (req, res) => {
+router.get('/courses', adminMiddleware, async (req, res) => {
     // Implement fetching all courses logic
+    const allCourses = await Course.find({
+    })
+    res.json({courses: allCourses});
 });
 module.exports = router;
