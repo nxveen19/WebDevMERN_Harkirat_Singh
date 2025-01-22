@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 app.use(express.json())
 const mongoose = require("mongoose");
-//connected with db user_app *NOT* with collection 
+//connected with db user_app, *NOT* with collection 
 mongoose.connect("") 
 const User = mongoose.model('users', {
     name : String,   // this is the schema
