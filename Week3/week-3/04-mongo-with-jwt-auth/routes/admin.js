@@ -43,12 +43,25 @@ router.post('/signin', async (req, res) => {
 }
 });
 
-router.post('/courses', adminMiddleware, (req, res) => {
-    // Implement course creation logic
+router.post('/courses', adminMiddleware, async (req, res) => {
+    const {title, description, imageLink, price} =  req.body;
+    const newCourse = await Course.create({
+        title,
+        description,
+        imageLink,
+        price
+    })
+    console.log(typeof(newCourse)) //Course ek obj hai to newCourse b ek obj hoga
+    res.json({
+        message: "Course created successfully", 
+        courseId: newCourse._id
+    })
 });
 
-router.get('/courses', adminMiddleware, (req, res) => {
-    // Implement fetching all courses logic
+router.get('/courses', adminMiddleware, async (req, res) => {
+    const allCourses = await Course.find({
+    })
+    res.json({courses: allCourses});
 });
 
 module.exports = router;

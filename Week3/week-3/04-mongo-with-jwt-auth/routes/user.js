@@ -16,7 +16,8 @@ router.get('/courses', (req, res) => {
 });
 
 router.post('/courses/:courseId', userMiddleware, (req, res) => {
-    // Implement course purchase logic
+    // we cannot req username here to authenticate user, 
+    // cause in the headers we are we are working with jwt
 });
 
 router.get('/purchasedCourses', userMiddleware, (req, res) => {
