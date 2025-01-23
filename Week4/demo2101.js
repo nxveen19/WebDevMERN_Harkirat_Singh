@@ -1,4 +1,5 @@
 // destructuring assigns OBJECTS AND ARRAYS to values
+
 const array = [1,2,3]
 const [firstValue, sencondValue] = array;
 console.log(firstValue);
