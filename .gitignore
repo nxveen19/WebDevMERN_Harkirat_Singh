@@ -2,3 +2,4 @@ node_modules/
 package.json
 package-lock.json
 .cache_ggshield/
+Week4/Postgres_SQL/tsconfig.json
