@@ -1,1 +1,1 @@
-{"last_found_secrets": [{"name": "MongoDB URI - c:\\Users\\pande\\Desktop\\WebDevMERN_Harkirat_Singh\\Week3\\week-3\\03-mongo\\db\\.env", "match": "c25bf345366e4402915aa85e46f322f49b1210049c758a96cf8c44946dabc700"}]}
+{"last_found_secrets": [{"match": "a2befd2009cb84782b6f59087457d41612f436f5ed2938ec3abcb8183fff5733", "name": "PostgreSQL URI - c:\\Users\\pande\\Desktop\\WebDevMERN_Harkirat_Singh\\Week4\\Postgres_SQL\\.env"}]}
