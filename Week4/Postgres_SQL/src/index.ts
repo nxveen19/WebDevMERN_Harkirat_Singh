@@ -26,6 +26,20 @@ async function insertData() {
     const res = await client.query(insertQuery);
 
 }
-
+// this can lead to sql injection
 insertData()
+
+//correct way to do it
+async function insertData2(username: string, email: string, password: string) {
+    await client.connect();
+    const insertQuery = " INSERT INTO users (username , email, password) VALUES ($1, $2, $3)";
+    const values = [username, email, password];
+    const res = await client.query(insertQuery, values);
+
+}
 //createTable()
+
+// PostgreSQL never treats values array as part of SQL syntax.
+// Values are sent separately and mapped internally before execution.
+// SQL injection is prevented because values are treated as raw data, not executable code.
+// client.query() ensures safe handling by keeping the SQL structure and values separate.
