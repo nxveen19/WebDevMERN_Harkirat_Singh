@@ -33,4 +33,13 @@ function createTable() {
         console.log(result);
     });
 }
-createTable();
+//Insert data into tables
+function insertData() {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield client.connect();
+        const insertQuery = " INSERT INTO users (username , email, password) VALUES ('username2', 'naveen@gmail.com', '123321')";
+        const res = yield client.query(insertQuery);
+    });
+}
+insertData();
+//createTable()

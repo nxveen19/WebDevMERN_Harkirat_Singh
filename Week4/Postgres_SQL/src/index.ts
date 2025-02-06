@@ -6,7 +6,6 @@ const dbUrl = process.env.postgres_string;
 const client = new Client({
     connectionString: dbUrl
 });
-
 async function createTable(){
     await client.connect();
     const result = await client.query(`
@@ -19,4 +18,14 @@ async function createTable(){
             `);
 console.log(result);
         } 
-createTable()
+
+//Insert data into tables
+async function insertData() {
+    await client.connect();
+    const insertQuery = " INSERT INTO users (username , email, password) VALUES ('username2', 'naveen@gmail.com', '123321')"
+    const res = await client.query(insertQuery);
+
+}
+
+insertData()
+//createTable()
