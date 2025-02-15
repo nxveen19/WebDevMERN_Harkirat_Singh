@@ -18,8 +18,10 @@ isLegal(12)
 
 //when parsing fn as an arg
 function runAfter1S(fn: () => void){
+    //void return type means its return value will be ignored
     setTimeout(fn, 1000);
 }
 runAfter1S(function(){
-    console.log("hello world"); 
+    console.log("hello world");
+    return 5; 
 })
